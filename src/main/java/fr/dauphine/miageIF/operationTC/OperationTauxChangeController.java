@@ -48,6 +48,10 @@ public class OperationTauxChangeController {
 		return repository.findBySourceAndDest(source.toUpperCase(), dest.toUpperCase());
 	}
 
+	@GetMapping("/operation-change/{id}")
+	public OperationTauxChange findOperationTauxChangeById(@PathVariable Long id) {
+		return repository.findById(id).get();
+	}
 	@PostMapping("/operation-change/{id}")
 	public OperationTauxChange updateTauxChange(@RequestBody OperationTauxChange operationTauxChange, @PathVariable Long id) {
 		operationTauxChange.setId(id);

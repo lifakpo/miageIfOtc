@@ -24,6 +24,19 @@ public class OperationTauxChange implements Serializable {
 	private Date date;
 	private double taux;
 
+	public OperationTauxChange() {
+		super();
+	}
+
+	public OperationTauxChange(String source, String dest, double montant, Date date, double taux) {
+		super();
+		this.source = source;
+		this.dest = dest;
+		this.montant = montant;
+		this.date = date;
+		this.taux = taux;
+	}
+
 	public Long getId() {
 		return id;
 	}

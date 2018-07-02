@@ -43,22 +43,18 @@ public class OperationTauxChangeController {
 		return repository.findAll();
 	}
 
-	@GetMapping("/operation-change/source/{source}/dest/{dest}")
-	public OperationTauxChange findOperationTauxChange(@PathVariable String source, @PathVariable String dest) {
-		return repository.findBySourceAndDest(source.toUpperCase(), dest.toUpperCase());
-	}
-
 	@GetMapping("/operation-change/{id}")
 	public OperationTauxChange findOperationTauxChangeById(@PathVariable Long id) {
 		return repository.findById(id).get();
 	}
+	
 	@PostMapping("/operation-change/{id}")
 	public OperationTauxChange updateTauxChange(@RequestBody OperationTauxChange operationTauxChange, @PathVariable Long id) {
 		operationTauxChange.setId(id);
 		//recuperation du taux si on ne l'a pas modifié
-		Optional<OperationTauxChange> oldOperation = repository.findById(id);
+		OperationTauxChange oldOperation = repository.findById(id).get();
 		if(operationTauxChange.getTaux() == 0) {
-			operationTauxChange.setTaux(oldOperation.get().getTaux());
+			operationTauxChange.setTaux(oldOperation.getTaux());
 		}
 		return repository.saveAndFlush(operationTauxChange);
 	}
